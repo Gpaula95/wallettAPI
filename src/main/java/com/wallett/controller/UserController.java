@@ -15,6 +15,7 @@ import com.wallett.dto.UserDTO;
 import com.wallett.entity.User;
 import com.wallett.response.Response;
 import com.wallett.service.UserService;
+import com.wallett.util.Bcrypt;
 
 @RestController
 @RequestMapping("user")
@@ -46,7 +47,7 @@ public class UserController {
 		u.setId(dto.getId());
 		u.setEmail(dto.getEmail());
 		u.setName(dto.getName());
-		u.setPassword(dto.getPassword());
+		u.setPassword(Bcrypt.getHash(dto.getPassword()));
 		
 		return u;
 	}
@@ -57,7 +58,6 @@ public class UserController {
 		dto.setId(u.getId());
 		dto.setEmail(u.getEmail());
 		dto.setName(u.getName());
-		dto.setPassword(u.getPassword());
 		
 		return dto;
 	}
